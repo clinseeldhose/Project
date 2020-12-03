@@ -18,7 +18,28 @@ Have a documentation section on your website.
 
 In this section, your website must contains examples on how to use each API call.
 
+
 PROJECT 1 : Cooking Recipe Network(topic)
 
 Share recipes, informing the community you are cooking it right now, whereabout you live, offer free samples of you just cooked.
 People can rate the user, the recipe, or the specific meal that was shared.
+
+OUTCOMES
+
+In this project, each team should develop a Online Platform to provide a service to the people from Thunder Bay. The aim of the application is to enhance somehow their lifestyle.
+The goal of the project is to evaluate the team work and management of each group, as well as access their proficiency in Javascript development with integration with the relational Database MySQL.
+The website should be composed of static HTML, CSS and JS files. However, from the user experience perspective, the website will be dynamic. Javascript must be used to request DATA from the server using a REST API and modify the website interface accordingly.
+The JQuery and Bootstrap libraries are required to be used.
+Among the project files, you must include the items below. Marks will be deducted if something is missing.
+* db.sql create and populate your own database.
+o When generating this file, check the option that creates a schema if it does not exists.
+* database schema.png
+* usecase diagram.png
+* wireframe.png
+
+
+DATABASE SPECIFICATION
+For the project, make sure
+* All IDs are BIGINT and Auto Increment
+* Add proper table constraints involving Foreign keys.
+
