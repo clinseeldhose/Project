@@ -43,3 +43,40 @@ For the project, make sure
 * All IDs are BIGINT and Auto Increment
 * Add proper table constraints involving Foreign keys.
 
+Project 1 - Milestone A. 5 Marks. Due to Friday, Nov 27th.
+PDF Proposal (Slide show)
+Explain your idea and LIST your functionalities
+Use Case Diagram
+Include initial DB modeling, i.e. the Entity Relationship diagram
+Simple Wireframe
+Project Diagrams:
+Also include the items below as separate files, outside of your PDF proposal
+Initial DB modeling
+Initial Wireframe
+Use Case Diagram
+NOTE
+In every milestone after milestone A, for both Project I and Project II, include these files. Update them accordingly with the development of your project.
+Project 1 - Milestone B. 10 Marks. Due to Sunday, Dec. 6th.
+Project Diagrams and DB dump updated.
+All functionalities related with User login and profile.
+Project 1 - Milestone C. 15 Marks. Due to Sunday, Dec. 13th
+Project Diagrams and DB dump updated.
+
+Other REST APIs
+
+Documentation part with demonstration of REST API usage
+
+Final Product
+
+All the other functionalities using their respective REST APIs
+DB dump updated.
+Code Refactor
+
+Make sure to have a modular code and a well organized project structure.
+Projects that do not meet this requirement will be penalized.
+Youtube Video
+
+Max 8 minutes
+Try to sell your product and its API.
+No need to price it.
+
