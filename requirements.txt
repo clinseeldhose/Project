@@ -1,0 +1,24 @@
+Project 1 : REQUIREMENTS
+
+Create the REST API for you web application, have the login functionality and API demo written pure HTML, CSS, Javascript. JQuery and Bootstrap must be used.
+
+Create Login functionality of your web application
+
+These are the Login related functionalities. The user should be able to
+
+Login, logout, sign in, reset password, recover username (if different than email)
+Once logged in, the user should have access to a personalized home page.
+At this point, you could have only a greeting message
+On the foot of the page, inform the last time the user was logged in.
+If clicked, the user should see the login history.
+The user should be able to change his profile information.
+Fully implement the REST API for your web application
+
+Have a documentation section on your website.
+
+In this section, your website must contains examples on how to use each API call.
+
+PROJECT 1 : Cooking Recipe Network(topic)
+
+Share recipes, informing the community you are cooking it right now, whereabout you live, offer free samples of you just cooked.
+People can rate the user, the recipe, or the specific meal that was shared.
