@@ -1,8 +1,9 @@
 
 $(document).ready(function () {
 
+    $(".userName").html(localStorage.getItem("userName"));
 
-    $(".registerbtn").click(function (event) {
+    $("#registerbtn").click(function (event) {
 
         // console.log("register clicked");
 
@@ -21,7 +22,7 @@ $(document).ready(function () {
         }
         else {
 
-            $(".registerbtn").prop("disabled", true);
+            $("#registerbtn").prop("disabled", true);
 
             $.ajax({
                 type: "POST",
@@ -38,16 +39,16 @@ $(document).ready(function () {
                 }
             });
 
-            $(".registerbtn").prop("disabled", false);
+            $("#registerbtn").prop("disabled", false);
         }
     });
 
-    $(".loginbtn").click(function (event) {
+    $("#loginbtn").click(function (event) {
 
         // console.log("register clicked");
 
         var data = {}
-      
+
         data["email"] = $("#login_email").val();
         data["password"] = $("#login_password").val();
 
@@ -56,7 +57,7 @@ $(document).ready(function () {
         }
         else {
 
-            $(".loginbtn").prop("disabled", true);
+            $("#loginbtn").prop("disabled", true);
 
             $.ajax({
                 type: "POST",
@@ -66,35 +67,30 @@ $(document).ready(function () {
                 dataType: 'json',
                 timeout: 600000,
                 success: function (data) {
-                    console.log("DONE");
+                    console.log("Login Success");
                     console.log(data);
-                    document.cookie = "token="+ data.token;
-                   var  token= getCookieValue("token");
-                    console.log(token);
-                    console.log(parseJwt( token));
+                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("userName", data.userName);
+
+                    window.location.href = "home.html";
                 },
                 error: function (e) {
                     console.log("ERROR: ", e);
                 }
             });
 
-            $(".loginbtn").prop("disabled", false);
+            $("#loginbtn").prop("disabled", false);
         }
     });
 
 });
 
-function parseJwt (token) {
+function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 
     return JSON.parse(jsonPayload);
 };
-
-function getCookieValue(a) {
-    var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
-    return b ? b.pop() : '';
-}
