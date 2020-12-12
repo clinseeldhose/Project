@@ -1,26 +1,35 @@
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
+
+const result = dotenv.config();
+if (result.error) {
+  console.log('Can\'t find the env file');
+  throw result.error;
+}
+
 const app = express();
 
 const corsOptions = {
-    credentials: true
-  };
+  credentials: true
+};
 app.use(cors(corsOptions));
 
-app.use(express.urlencoded({extended : false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
 
-const authRoute = require('./routes/auth');
-const mysql = require('mysql');
+app.use(express.static('public'));
 
-
-app.use('/api/user', authRoute);   
+const userRoute = require('./routes/user');
+const cookieRoute = require('./routes/cookie');
 
 
-app.listen(process.env.PORT || '3000', ()=>{
-    console.log(`Server Running on port: ${process.env.PORT || '3000'}`);
+app.use('/api/user', userRoute);
+app.use('/api/cookie',cookieRoute);
+
+
+app.listen(process.env.PORT || '3000', () => {
+  console.log(`Server Running on port: ${process.env.PORT || '3000'}`);
 });
 
 

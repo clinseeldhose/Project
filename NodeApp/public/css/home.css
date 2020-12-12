@@ -1,0 +1,23 @@
+body {
+    background-image: url("../img/bg2.jpg");
+  }
+  
+.card-footer {
+    display: flex;
+  }
+  
+  .card-footer img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .left {
+   display: flex;
+   flex: 0 50%;
+  }
+  
+  .right {
+    display: flex;
+    flex: 0 50%;
+    justify-content: flex-end;
+   }
