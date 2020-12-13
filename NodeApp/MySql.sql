@@ -28,6 +28,8 @@ INSERT INTO users (first_name, middle_name, last_name,suffix,dob,user_name,passw
 
 select * from users;
 
+update users set first_name = 'new fn', last_name = 'new ln',user_name = 'new un',email = 'new email' where user_id = 10;
+
 --------------------------------------------------------------------------------
 
 Create Table recipes ( recipe_id BIGINT(8) NOT NULL AUTO_INCREMENT,user_id BIGINT(8),post_date timestamp, recipe_name VARCHAR(50) not null, recipe_desc text not null,
@@ -47,10 +49,19 @@ insert into recipes (user_id,recipe_name,recipe_desc)
 drop table recipes;
 --------------------------------------------------------------------------------
 
-Create table comments (comment_id BIGINT(8)  NOT NULL AUTO_INCREMENT,user_id BIGINT(8), recipe_id BIGINT(8),comment text,
-                        PRIMARY KEY ( comment_id ), FOREIGN KEY (user_id) REFERENCES users(user_id), FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id));
-                        
-drop table comments;
+create table ratings(rating_id BIGINT(8) NOT NULL AUTO_INCREMENT, user_id BIGINT(8),recipe_id BIGINT(8),rating varchar(20),
+                    PRIMARY KEY ( rating_id ), FOREIGN KEY (user_id) REFERENCES users(user_id), FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id));
+  
+select * from ratings;
+
+insert into ratings values (1,8,7,"like");      
+insert into ratings values (2,9,7,"like");      
+insert into ratings values (3,10,7,"dislike");      
+-- insert into ratings values (1,8,7,"like");      
+
+select count(rating_id) as rating  from ratings where recipe_id = 7 and rating = 'like';
+select count(rating_id)  from ratings where recipe_id = 7 and rating = 'dislike';
+
 
 --------------------------------------------------------------------------------
 
@@ -67,11 +78,21 @@ show columns from loginfo;
 
 insert into loginfo (user_id)
             values (8);
+            
+select * from loginfo where user_id = 8 order by loginfo_id desc;
 
+--------------------------------------------------------------------------------
+
+Create table comments (comment_id BIGINT(8)  NOT NULL AUTO_INCREMENT,user_id BIGINT(8), recipe_id BIGINT(8),comment text,
+                        PRIMARY KEY ( comment_id ), FOREIGN KEY (user_id) REFERENCES users(user_id), FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id));
+                        
+drop table comments;
+
+                    
 -- need tables
     -- recipes -> recipe_id(pk),user_id(fk),post_date, recipe_name, recipe_desc, 
     -- comments -> comment_id(pk),user_id(fk), recipe_id(fk),comment
-   *-- ratings  ->rating_id(pk), user_id(fk), recipe_id(fk), rating_value
+    -- ratings  ->rating_id(pk), user_id(fk), recipe_id(fk), rating_value
     -- logInfo -> loginfo_id(pk), user_id(fk), timestamp
     
     
