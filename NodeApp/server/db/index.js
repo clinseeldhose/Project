@@ -66,6 +66,20 @@ cookieDb.insertUser = (user, hashPass) => {
     });
 };
 
+cookieDb.updateUser = (reqBody) => {
+
+    // console.log(user.fname);
+    return new Promise((resolve, reject) => {
+        dbPool.query(`update users set first_name = ?, last_name = ?,user_name = ?,email = ? where user_id = ? `
+            , [reqBody.first_name, reqBody.last_name, reqBody.user_name, reqBody.email, reqBody.user_id], (err, results) => {
+                if (err) {
+                    return reject(err);
+                }
+                return resolve(results);
+            });
+    });
+};
+
 cookieDb.updateLogInfo = (user_id) => {
 
     // console.log( user_id);
@@ -83,7 +97,7 @@ cookieDb.getAllCookie = () => {
 
     // console.log( user_id);
     return new Promise((resolve, reject) => {
-        dbPool.query(`select * from recipes`, (err, results) => {
+        dbPool.query(`select * from recipes order by recipe_id desc`, (err, results) => {
             if (err) {
                 return reject(err);
             }
@@ -106,7 +120,33 @@ cookieDb.addCookie = (cookie) => {
 };
 
 
+cookieDb.getLogHistory = (user_id) => {
 
+    // console.log( user_id);
+    return new Promise((resolve, reject) => {
+        dbPool.query(`select * from loginfo where user_id = ? order by loginfo_id desc`, [user_id], (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+};
+
+cookieDb.getRating = (recipe_id, type) => {
+
+    // console.log(recipe_id);
+    // console.log(type);
+
+    return new Promise((resolve, reject) => {
+        dbPool.query(`select count(rating_id) as rating from ratings where recipe_id = ? and rating = ?`, [recipe_id, type], (err, results) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(results);
+        });
+    });
+};
 
 
 

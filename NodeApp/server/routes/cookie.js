@@ -4,6 +4,7 @@ const cookieController = require('../controllers/cookie');
 router.post ('/get', cookieController.get);
 
 //router.post ('/comment', cookieController.comment);
+router.post ('/getRating', cookieController.getRating);
 
 router.post ('/rate', cookieController.rate);
 

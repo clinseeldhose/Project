@@ -55,7 +55,7 @@ function login(event) {
             timeout: 600000,
             success: function (data) {
                 console.log("Login Success");
-                console.log(data);
+                //console.log(data);
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user",JSON.stringify(data.user));
 
@@ -156,10 +156,7 @@ function register(event) {
             }
         });
 
+        goLogin();
         $("#registerbtn").prop("disabled", false);
     }
 }
-
-/////////////////////////////////////////////////////////////////
-//  JS for Home 
-/////////////////////////////////////////////////////////////////

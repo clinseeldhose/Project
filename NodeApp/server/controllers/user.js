@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 exports.register = async (req, res) => {
-    console.log(req.body);
+    console.log("Register User : " + JSON.stringify(req.body));
 
     const { name, email, password, pswRepeat } = req.body;
 
@@ -29,14 +29,49 @@ exports.register = async (req, res) => {
     }
 }
 
+exports.update = async (req, res) => {
+    console.log("Update User : " + JSON.stringify(req.body));
+
+    const { user_id,first_name, last_name,user_name,email } = req.body;
+
+    try {
+        let user = await db.getUserbyMail(email);
+        let update = true;
+
+        user.forEach(element => {
+           if(element.user_id != user_id){
+            update = false;
+           } 
+           
+        });
+
+        if (!update) {
+            res.status(401).json({
+                message: "User updation Failed - Email Already in Use"
+            });
+            console.log('Email exist :' + email)
+        }
+        else {
+            let op = await db.updateUser(req.body);
+            res.status(201).json({
+                message: "User Updation Success"
+            });
+        }
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+
+
 exports.login = async (req, res) => {
-    console.log(req.body);
+    console.log("User Login : "+ JSON.stringify(req.body));
 
     const { email, password } = req.body;
 
     try {
         let user = await db.getUserbyMail(email);
-        console.log(user[0]);
+        //console.log(user[0]);
         if (user.length > 0) {
             if (await bcrypt.compare(password, user[0].password)) {
 
@@ -74,30 +109,42 @@ exports.login = async (req, res) => {
 }
 
 exports.forgotPass = async (req, res) => {
-    console.log(req.body);
-
-}
-
-exports.update = async (req, res) => {
-    console.log(req.body);
+    console.log("Forgot Pass " + JSON.stringify(req.body));
 
 }
 
 exports.logHistory = async (req, res) => {
-    console.log(req.body);
+    console.log("LogHistory :" + JSON.stringify(req.body));
+    const { user_id } = req.body;
+
+    history = await db.getLogHistory(user_id);
+
+    if (history) {
+        //console.log(history);
+        res.status(201).json({
+            history
+        });
+    }
+    else {
+        console.log("Error : No history " + user_id);
+        res.status(404).json({
+            message :"No History"
+        });
+    }
+
 
 }
 
 exports.getUser = async (req, res) => {
-    console.log(req.body);
+    console.log("Get User : "+JSON.stringify(req.body));
     const { user_id } = req.body;
 
-    console.log("checking ");
-    console.log(user_id);
+    // console.log("checking ");
+    // console.log(user_id);
 
     user = await db.getUser(user_id);
     if (user) {
-        console.log(user);
+       // console.log(user);
         res.status(201).json({
             user
         });
