@@ -11,10 +11,10 @@ exports.get = async (req, res) => {
 }
 
 exports.add = async (req, res) => {
-    console.log(req.body);
+    console.log("Adding Cookie"+JSON.stringify(req.body));
 
     const { recipe_name, recipe_desc, user_id } = req.body;
-    await db.addCookie("Add Cookie : "+JSON.stringify(req.body))
+    await db.addCookie(req.body);
     res.status(201).json({
         "message:": "Cookie Added"
     });
@@ -22,7 +22,7 @@ exports.add = async (req, res) => {
 }
 
 exports.getRating = async (req, res) => {
-    console.log("Get Rating : "+JSON.stringify(req.body));
+   // console.log("Get Rating : "+JSON.stringify(req.body));
     const { recipe_id, type } = req.body;
     result1 = await db.getRating(recipe_id, "like");
     result2 = await db.getRating(recipe_id, "dislike");

@@ -136,7 +136,7 @@ exports.logHistory = async (req, res) => {
 }
 
 exports.getUser = async (req, res) => {
-    console.log("Get User : "+JSON.stringify(req.body));
+    // console.log("Get User : "+JSON.stringify(req.body));
     const { user_id } = req.body;
 
     // console.log("checking ");
